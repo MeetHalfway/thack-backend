@@ -5,62 +5,34 @@ module.exports = function (app) {
   // ==========================================================================
   // CONTROLLER SETUP =========================================================
   // ==========================================================================
-  var AppController = require('../controller/appController');
+  var AppController = require('../controller/userSearch');
 
-  // =============================================================================
-  // LANGUAGE ====================================================================
-  // =============================================================================
-  app.get('/locales', function (req, res) {
 
-    var languages = AppController.getAvailableLanguages();
-    res.status(200).json(languages);
-  });
+  app.get('/profile', function (req, res) {
 
-  app.get('/user/:id', function (req, res) {
-
-    var userID = req.params.id;
+    var userID = '356a192b7913b04c54574d18c28d46e6395428ab';
     var user = AppController.getUser(userID);
+    //console.log(user);
     res.status(200).json(user);
 
+  });
+  app.get('/friends', function (req, res) {
 
-    /*console.log('userID req = ' + userID);
-    console.log(JSON.stringify(user))*/
+    var userID = '356a192b7913b04c54574d18c28d46e6395428ab';
+    var result = AppController.getFriendsList(userID);
+    res.status(200).json(result);
+
 
   });
 
-  app.get('/locales/:code', function (req, res) {
+  app.get('/friends/:id', function (req, res) {
 
-    var languageCode = req.param('code');
-    console.log('Language code retrieved: ' + languageCode);
+    var userID = req.params.id;
+    var result = AppController.getFriend(userID);
+    res.status(200).json(result);
 
-    AppController.getTranslations(languageCode)
-      .then(function(translations) {
-        res.status(200).json(translations);
-      })
-      .catch(function(err) {
-        res.status(500).json(err.message);
-      });
   });
 
-  // =============================================================================
-  // CURRENCY ====================================================================
-  // =============================================================================
-  app.get('/currencies', function (req, res) {
-
-    var currencies = AppController.getAvailableCurrencies();
-    res.status(200).json(currencies);
-  });
-
-  app.get('/countries', function (req, res) {
-
-    AppController.getCountries()
-      .then(function(countryList) {
-        res.status(200).json(countryList);
-      })
-      .catch(function(err) {
-        res.status(500).json(err.message);
-      });
-  });
 
   // =============================================================================
   // FALLBACK ====================================================================

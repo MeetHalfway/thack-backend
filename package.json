@@ -18,7 +18,7 @@
     "nedb": "^1.1.2",
     "sprintf-js": "^1.0.2",
     "tzwhere": "^1.0.0",
-    "underscore": "1.8.2"
+    "underscore": "^1.8.2"
   },
   "devDependencies": {
     "gulp": "^3.8.8",
@@ -27,7 +27,7 @@
     "morgan": "^1.0.0"
   },
   "scripts": {
-    "test": ""
+    "watch": "npm-watch"
   },
   "repository": {
     "type": "git",

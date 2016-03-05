@@ -1,39 +1,13 @@
 // controllers/appController.js
 
 var Promise = require("es6-promise");
-
+var _ = require("underscore");
+var users = require("../mockup/user1.json");
+var thisUser = _.find(users, function(user){ return user._id == '356a192b7913b04c54574d18c28d46e6395428ab'; });
 
 
 module.exports = {
 
-  getAvailableCurrencies: function() {
-    return [];
-  },
 
-  getAvailableLanguages: function() {
-    return [];
-  },
 
-  getUser: function(userID) {
-    console.log(userID);
-    user = {}
-    if(userID == 1){
-      user.name = "Alessio"
-
-    }else if (userID == 2){
-      user.name = "Nele"
-
-    } else {
-      user.notFound = true
-    }
-    return user;
-  },
-
-  getCountries: function() {
-
-    return new Promise(function(resolve, reject) {
-      
-        resolve([]);
-    });
-  }
 };
