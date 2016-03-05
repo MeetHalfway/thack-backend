@@ -48,7 +48,7 @@ function start () {
 
 	// load routes with fully configured express
     require('./routes/search.js')(app);
-
+    require('./routes/accommodation.js')(app);
 
     // put this at end of the list. It will deny all requests that are
     // not defined in the previous routes files.
