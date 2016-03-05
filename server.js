@@ -44,17 +44,18 @@ function setupServer() {
  * Start Express
  */
 function start () {
-  setupServer();
+    setupServer();
 
-	// load routes with fully configured express and passport
-	// ....
- 
-  // put this at end of the list. It will deny all requests that are
-  // not defined in the previous routes files.
-  require('./routes/app.js')(app);
+	// load routes with fully configured express
+    require('./routes/search.js')(app);
 
-  app.listen(port);
-  console.log('\tServer started on port ' + port + '.');
+
+    // put this at end of the list. It will deny all requests that are
+    // not defined in the previous routes files.
+    require('./routes/app.js')(app);
+
+    app.listen(port);
+    console.log('\tServer started on port ' + port + '.');
 }
 
 // start the server ============================================================
