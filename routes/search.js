@@ -13,7 +13,7 @@ module.exports = function (app) {
     app.post('/search', function (req, res) {
 
         if(searchRequestIsValid(req)) {
-            SearchController.getFlights(req.body)
+            SearchController.getBestDestinations(req.body)
                 .then(function(result) {
                     res.status(200).json(result);
                 })
@@ -50,6 +50,14 @@ module.exports = function (app) {
     /**
      * Checks the validity of a search request object.
      *
+     * {
+     *   startDate: "2016-06-12",
+     *   endDate: "2016-06-15",
+     *   people: [
+     *     { ... }
+     *   ]
+     * }
+     *
      * @param req
      * @returns {boolean}
      */
@@ -58,9 +66,8 @@ module.exports = function (app) {
         if(req.body['startDate'] && req.body['endDate'] &&
             req.body['people'] && req.body['people'].length > 1) {
 
-            if(!timingIsValid(req.body['startDate']) || !timingIsValid(req.body['endDate'])) {
+            if(!timingIsValid(req.body['startDate']) || !timingIsValid(req.body['endDate']))
                 return false;
-            }
         }
         else
             return false;
@@ -73,7 +80,7 @@ module.exports = function (app) {
      */
     function timingIsValid(timing) {
         var timePattern =
-            /^[0-9]{4}\-[0-9]{2}\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}$/;
+            /^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/;
 
         return timePattern.test(timing);
     }

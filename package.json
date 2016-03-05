@@ -16,6 +16,7 @@
     "moment": "^2.9.0",
     "moment-timezone": "^0.4.0",
     "nedb": "^1.1.2",
+    "shortid": "^2.2.4",
     "sprintf-js": "^1.0.2",
     "tzwhere": "^1.0.0",
     "underscore": "^1.8.2"
