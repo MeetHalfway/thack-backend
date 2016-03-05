@@ -1,0 +1,20 @@
+# generic files to ignore
+*~
+*.DS_Store
+
+# WebStorm specific files
+.idea
+
+#VS Code specific files
+.vscode
+
+# build files
+node_modules/
+
+# frontend stuff
+.sass-cache/
+bower_components/
+typings/
+build/
+frontend/scripts/data/
+frontend/scripts/locale/
