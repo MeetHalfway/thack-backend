@@ -15,5 +15,15 @@ module.exports = {
             if(city == "Budapest") resolve(SkyScannerMockBudapest);
             else resolve(SkyScannerMockBerlin);
         });
+    },
+
+    getConnection: function(startDate, endDate, origin, destination) {
+
+        return new Promise(function(resolve, reject) {
+
+            // TODO implement
+
+            resolve({});
+        });
     }
 };

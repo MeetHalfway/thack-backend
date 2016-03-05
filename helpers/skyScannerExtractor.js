@@ -41,7 +41,8 @@ module.exports = {
                 return {
                     minPrice: quote.minPrice,
                     city: destinationObject['CityName'],
-                    country: destinationObject['CountryName']
+                    country: destinationObject['CountryName'],
+                    airportCode: destinationObject['IataCode']
                 }
             }
             else
@@ -49,5 +50,21 @@ module.exports = {
         }).filter(function(result) {
             return !!result;
         });
+    },
+
+    extractStartLocations: function(resultArray) {
+
+        resultArray[0].forEach(function(result) {
+            // TODO
+        });
+
+        resultArray[1].forEach(function(result) {
+            // TODO
+        });
+
+        // TODO think about the data structure of the start locations in the database
+        // Should we separate them by the user? Or just add them randomly?
+        
+        return [];
     }
 };

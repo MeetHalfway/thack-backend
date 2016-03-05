@@ -48,6 +48,7 @@ module.exports = {
             var resultDoc = {
               _id: searchId,
               timestamp: Math.floor(Date.now() / 1000),
+              startLocations: SkyScannerHelper.extractStartLocations(resultArray),
               bestConnections: bestConnections
             };
 
