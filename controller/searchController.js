@@ -2,9 +2,12 @@
 
 var Promise = require("es6-promise").Promise;
 var shortid = require("shortid");
+var nedb = require('nedb');
 
 var SkyScannerHelper = require("../helpers/skyScannerExtractor");
 var SkyScannerQuery = require("../helpers/skyScannerQuery");
+
+var Storage = new nedb();
 
 module.exports = {
 
@@ -42,10 +45,19 @@ module.exports = {
                 );
 
             // store intermediate results and return results to client
-            // TODO
+            var resultDoc = {
+              _id: searchId,
+              timestamp: Math.floor(Date.now() / 1000),
+              bestConnections: bestConnections
+            };
 
-            resolve(bestConnections);
+            Storage.update({ _id: searchId }, resultDoc, { upsert: true }, function (err, numReplaced, upsert) {
+              // if no document with the given id is found, it will add a new document to the collection
+              if(err) reject(err);
+              if(!upsert && numReplaced == 0) reject(Error('Could not store the result object.'));
 
+              resolve(bestConnections);
+            });
           })
           .catch(reject);
     });
@@ -58,14 +70,21 @@ module.exports = {
      */
   getResultDetails: function(searchId) {
     return new Promise(function(resolve, reject) {
+      var searchObject = { _id: searchId };
 
-      // retrieve data from database
+      Storage.find(searchObject, function (err, docs) {
+        if(err) reject(err);
 
-      // trigger detail searches in SkyScanner
+        // docs is an array containing documents
+        if(!docs || docs.length == 0) reject(new Error('No document could be found.'));
+        else {
+          if(docs.length > 1) console.warn('warn', 'More than one document with the given ID found.');
 
-      //
+          // TODO trigger detail searches in SkyScanner
 
-      resolve([]);
+          resolve(docs[0]['bestConnections']);
+        }
+      });
     });
   },
 
