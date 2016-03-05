@@ -16,6 +16,18 @@ module.exports = function (app) {
     res.status(200).json(languages);
   });
 
+  app.get('/user/:id', function (req, res) {
+
+    var userID = req.params.id;
+    var user = AppController.getUser(userID);
+    res.status(200).json(user);
+
+
+    /*console.log('userID req = ' + userID);
+    console.log(JSON.stringify(user))*/
+
+  });
+
   app.get('/locales/:code', function (req, res) {
 
     var languageCode = req.param('code');
@@ -56,6 +68,6 @@ module.exports = function (app) {
 
   // all other requests should be answered with 404
   app.use('*', function (req, res) {
-    res.status(404).send('status.user.error.server.failure');
+    res.status(404).send('Whattaheck are you doing here eh? You deserve a 404');
   });
 };
