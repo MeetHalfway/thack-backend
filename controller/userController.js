@@ -1,4 +1,4 @@
-// controllers/userSearch.js
+// controllers/userController.js
 // Controller for the user search
 
 var Promise = require("es6-promise");
@@ -14,7 +14,7 @@ module.exports = {
 
         user = _.find(users, function(user){return user._id == thisUser._id; });
 
-        result = _.clone(user)
+        result = _.clone(user);
         if(result.top_friends){
             delete(result.top_friends);
         }
