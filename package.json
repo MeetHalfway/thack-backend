@@ -15,6 +15,7 @@
     "jwt-simple": "^0.2.0",
     "moment": "^2.9.0",
     "moment-timezone": "^0.4.0",
+    "morgan": "^1.0.0"
     "nedb": "^1.1.2",
     "shortid": "^2.2.4",
     "sprintf-js": "^1.0.2",
@@ -24,8 +25,7 @@
   "devDependencies": {
     "gulp": "^3.8.8",
     "gulp-notify": "^1.8.0",
-    "gulp-plumber": "^0.6.5",
-    "morgan": "^1.0.0"
+    "gulp-plumber": "^0.6.5"
   },
   "scripts": {
     "watch": "npm-watch"
@@ -33,6 +33,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/MeetHalfway/thack-backend.git"
+  },
+  "engines": {
+    "node": "4.2.6"
   },
   "keywords": [
     "express.js"
