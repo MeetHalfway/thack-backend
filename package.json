@@ -28,7 +28,8 @@
     "morgan": "^1.0.0"
   },
   "scripts": {
-    "watch": "npm-watch"
+    "watch": "npm-watch",
+	"start": "node server"
   },
   "repository": {
     "type": "git",
