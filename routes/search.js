@@ -26,6 +26,16 @@ module.exports = function (app) {
         }
     });
 
+    app.get('/search/details/:id', function(req, res) {
+        SearchController.getResultDetails(req.params.id)
+            .then(function(result) {
+                res.status(200).json(result);
+            })
+            .catch(function() {
+                res.sendStatus(500);
+            });
+    });
+
     app.get('/search/:id', function (req, res) {
         SearchController.getResults(req.params.id)
             .then(function(result) {

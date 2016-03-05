@@ -16,6 +16,17 @@ module.exports = {
   },
 
   /**
+   * Get the full search results.
+   *
+   * @param searchId
+     */
+  getResultDetails: function(searchId) {
+    return new Promise(function(resolve, reject) {
+      resolve([]);
+    });
+  },
+
+  /**
    * Retrieve results that already have been created.
    *
    * @param searchId
