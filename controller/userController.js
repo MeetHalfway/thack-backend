@@ -1,46 +1,50 @@
 // controllers/userController.js
-// Controller for the user search
 
-var Promise = require("es6-promise");
 var _ = require("underscore");
-var users = require("../mockup/user1.json");
-var thisUser = _.find(users, function(user){ return user._id == '356a192b7913b04c54574d18c28d46e6395428ab'; });
 
+var users = require("../data/users.json");
 
-module.exports = {
+module.exports = function(userId) {
+    return {
 
-    getUser: function() {
-        var result = {};
+        /**
+         * Return's user data of logged-in user.
+         */
+        getUserData: function() {
+            var user = _.find(users, function(user) {return user._id == userId; });
 
-        user = _.find(users, function(user){return user._id == thisUser._id; });
+            var result = _.clone(user);
+            if(result.hasOwnProperty("top_friends")){
+                delete(result.top_friends);
+            }
 
-        result = _.clone(user);
-        if(result.top_friends){
-            delete(result.top_friends);
+            return result;
+        },
+
+        /**
+         * Returns friends of logged-in user.
+         *
+         * @returns {Array}
+         */
+        getFriendsList: function() {
+            var result = _.find(users, function(user) { return user._id == userId; });
+
+            return result.hasOwnProperty("top_friends") ? result.top_friends : [];
+        },
+
+        /**
+         * Returns specific friend with given id for logged-in user.
+         *
+         * @param friendId
+         * @returns {object}
+         */
+        getFriend: function(friendId) {
+            var userObject = _.find(users, function(user){ return user._id == userId; });
+
+            if(userObject)
+                return _.find(userObject.top_friends, function(friend) { return friend._id == friendId; });
+
+            return null;
         }
-
-        return result
-    },
-
-    getFriendsList: function(userID) {
-        var result = {};
-
-        if(userID === thisUser){
-            result = _.find(users, function(user){ return user._id == userID; });
-        } else {
-            result = _.find(users, function(user){ return user._id == thisUser._id; });
-        }
-
-        return result.top_friends;
-    },
-
-    getFriend: function(userID) {
-        var result = {};
-
-        result = _.find(users, function(user){ return user._id == userID; });
-
-        return result.top_friends;
     }
-
-
 };
