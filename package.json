@@ -1,7 +1,7 @@
 {
-  "name": "1clicktrips",
+  "name": "HalfWay-backend",
   "version": "0.0.1",
-  "description": "The API layer for the business traveler platform offering end to end trip management.",
+  "description": "This is the backend of HalfWay app.",
   "main": "server.js",
   "dependencies": {
     "async": "^0.9.0",
@@ -37,9 +37,8 @@
     "express.js"
   ],
   "author": {
-    "name": "Sascha Gros",
-    "email": "gros.sascha@gmail.com",
-    "url": "https://twitter.com/swapzone"
+    "name": "MeetHalfWay hackathon team",
+    "url": "https://github.com/MeetHalfway"
   },
   "license": "ISC",
   "bugs": {
