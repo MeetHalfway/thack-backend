@@ -1,25 +1,24 @@
 var Promise = require('es6-promise').Promise;
 var _ = require('underscore');
+var http = require('http');
 
 var SkyScannerMockBerlin = require("../mocking/SkyScanner.BestPrice.Berlin.json");
 var SkyScannerMockBudapest = require("../mocking/SkyScanner.BestPrice.Budapest.json");
 
 module.exports = {
 
-    API_KEY: "ah239167722783844563187741844386",
-
     getAllDestinationsFromCity: function(startDate, endDate, city, country) {
 
         return new Promise(function(resolve, reject) {
 
             var url = "http://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/"
-                + this.convertCountry(country) // "GB"
+                + country // "GB"
                 + "/EUR/en-US/"
                 + city // LON
                 + "/anywhere/"
                 + startDate + "/"
-                + endDate + "?apiKey=" + this.API_KEY;
-
+                + endDate + "?apiKey=" + getApiKey();
+            
             http.get(url, function (res) {
                 var response = "";
 
@@ -42,10 +41,9 @@ module.exports = {
 
             resolve({});
         });
-    },
-
-    convertCountry: function(country) {
-
     }
-
 };
+
+function getApiKey() {
+    return "ah239167722783844563187741844386"
+}
