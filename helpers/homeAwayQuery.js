@@ -5,7 +5,7 @@ var https = require('https');
 var DISTANCE_IN_KM = 10;
 
 module.exports = {
-    
+
     getAllAccomodationsCity: function(city) {
 
         return new Promise(function(resolve, reject) {
