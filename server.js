@@ -39,6 +39,12 @@ function setupServer() {
     }));
     app.use(cors());
 
+    // handling the CORS pre-flight issue
+    app.options('/search', cors()); // enable pre-flight request for search POST request
+    app.get('/search/details/:id', cors(), function(req, res, next){
+        next();
+    });
+
     app.set('jwtTokenSecret', 'secretsecret');
 }
 
