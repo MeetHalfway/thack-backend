@@ -39,7 +39,7 @@ module.exports = {
                         res.on('end', function() {
 
                             _.each(response.entries, function(entry) { // THIS DOESN'T MAKE ANY SENSE... BUT YOU KNOW, I'M IN A HACKTHON AND ONLY 1.5H LEFT.. MADRE PERDONA MI VIDA LOCA!
-                                if(entry.priceRanges[0].from > 60){
+                                if(entry.priceRanges[0].from > 250){
                                     console.log("ignore");
                                     entry.ignore = true;
                                 }
