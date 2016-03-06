@@ -95,6 +95,10 @@ module.exports = {
         else {
           if(docs.length > 1) console.warn('warn', 'More than one document with the given ID found.');
 
+
+          if(docs[0].trips && docs[0].trips.length)
+            return resolve(docs[0].trips);
+
           var promiseArray = [];
           docs[0].bestConnections.forEach(function(connection) {
 

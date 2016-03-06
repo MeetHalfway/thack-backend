@@ -15,7 +15,7 @@ module.exports = {
 
             getLatLong(city)
                 .then(function(location) {
-                    console.log("location");
+
 
                     var options = {
                         hostname: 'ws.homeaway.com',
