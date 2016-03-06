@@ -90,7 +90,7 @@ function startQuery(origin, destination, startDate, endDate) {
     return new Promise(function (resolve, reject) {
 
         if (!lastRequest || lastRequest && lastRequest.isBefore(moment()
-                .subtract(1500, 'milliseconds'))) {
+                .subtract(2500, 'milliseconds'))) {
 
             lastRequest = moment();
             getFlightData(origin, destination, startDate, endDate, "DE")
@@ -105,7 +105,7 @@ function startQuery(origin, destination, startDate, endDate) {
             setTimeout(function () {
                 startQuery(origin, destination, startDate, endDate)
                     .then(resolve).catch(reject);
-            }, 1000)
+            }, 800)
         }
     });
 }
@@ -308,7 +308,7 @@ function extractConnectionDataFromResult(result) {
     // take the cheapest itinerary
     var itinerary = result['Itineraries'][0];
 
-    var price = itinerary['PricingOptions'][0]['Price'] + "EUR";
+    var price = itinerary['PricingOptions'][0]['Price'];
     var deepLink = itinerary['PricingOptions'][0]['DeeplinkUrl'];
 
     var outboundLeg = _.find(result['Legs'], function(leg) {

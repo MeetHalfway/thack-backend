@@ -41,7 +41,7 @@ module.exports = {
         });
 
         // create the final data structure that is returned to the client
-       return resultSet.slice(0, 5).map(function(quote) {
+       return resultSet.slice(0, 3).map(function(quote) {
            var destinationObject = _.find(resultSetOne['Places'], function(place) {
               return place['PlaceId'] === quote.destinationId;
            });
