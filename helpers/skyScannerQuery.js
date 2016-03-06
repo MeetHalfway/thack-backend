@@ -2,9 +2,12 @@ var Promise = require('es6-promise').Promise;
 var _ = require('underscore');
 var http = require('http');
 var querystring = require('querystring');
+var moment = require('moment');
 
 var SkyScannerMockBerlin = require("../mocking/SkyScanner.BestPrice.Berlin.json");
 var SkyScannerMockBudapest = require("../mocking/SkyScanner.BestPrice.Budapest.json");
+
+var lastRequest = null;
 
 module.exports = {
 
@@ -54,20 +57,57 @@ module.exports = {
      */
     getConnection: function(startDate, endDate, origin, destination) {
 
-        /*
-        console.log(startDate);
-        console.log(endDate);
-        console.log(origin);
-        console.log(destination);
-        console.log();
-        */
+       // console.log(startDate);
+       // console.log(endDate);
+       // console.log(origin);
+       // console.log(destination);
+       // console.log();
 
-        return getFlightData(origin, destination, startDate, endDate, "DE")
+       return startQuery(origin, destination, startDate, endDate);
     }
 };
 
+/**
+ *
+ *
+ * @returns {string}
+ */
 function getApiKey() {
     return "ah239167722783844563187741844386"
+}
+
+/**
+ *
+ *
+ * @param origin
+ * @param destination
+ * @param startDate
+ * @param endDate
+ * @returns {*}
+ */
+function startQuery(origin, destination, startDate, endDate) {
+
+    return new Promise(function (resolve, reject) {
+
+        if (!lastRequest || lastRequest && lastRequest.isBefore(moment()
+                .subtract(1500, 'milliseconds'))) {
+
+            lastRequest = moment();
+            getFlightData(origin, destination, startDate, endDate, "DE")
+                .then(function(result) {
+                    console.log("SkyScanner request finished!");
+
+                    resolve(extractConnectionDataFromResult(result));
+                }).catch(reject);
+        }
+        else {
+            // delay call to API
+            setTimeout(function () {
+                startQuery(origin, destination, startDate, endDate)
+                    .then(resolve).catch(reject);
+            }, 1000)
+        }
+    });
 }
 
 /**
@@ -84,7 +124,7 @@ function getFlightData(origin, destination, startDate, endDate, country) {
 
     // build the post object with mandatory fields
     var postObject = {
-        apikey: getApiKey(),
+        apiKey: getApiKey(),
         country: country,
         currency: "EUR",
         locale: "en-US",
@@ -253,4 +293,57 @@ function getFlightData(origin, destination, startDate, endDate, country) {
             })
             .catch(reject);
     });
+}
+
+/**
+ *
+ *
+ * @param result
+ */
+function extractConnectionDataFromResult(result) {
+
+    var departureCode = result["Query"]["OriginPlace"];
+    var arrivalCode = result["Query"]["DestinationPlace"];
+
+    // take the cheapest itinerary
+    var itinerary = result['Itineraries'][0];
+
+    var price = itinerary['PricingOptions'][0]['Price'] + "EUR";
+    var deepLink = itinerary['PricingOptions'][0]['DeeplinkUrl'];
+
+    var outboundLeg = _.find(result['Legs'], function(leg) {
+        return leg['Id'] == itinerary['OutboundLegId'];
+    });
+
+    var departureTimeOutbound = outboundLeg['Departure'];
+    var durationOutbound = outboundLeg['Duration'];
+
+    var inboundLeg = _.find(result['Legs'], function(leg) {
+        return leg['Id'] == itinerary['InboundLegId'];
+    });
+
+    var departureTimeInbound = inboundLeg['Departure'];
+    var durationInbound = inboundLeg['Duration'];
+
+    var agentData = _.find(result['Agents'], function(agent) {
+        return agent['Id'] == itinerary['PricingOptions'][0]['Agents'][0];
+    });
+
+    var agency = agentData['name'];
+
+    return {
+        origin: departureCode,
+        destination: arrivalCode,
+        outbound: {
+            departureTime: departureTimeOutbound,
+            duration: durationOutbound
+        },
+        inbound: {
+            departureTime: departureTimeInbound,
+            duration: durationInbound
+        },
+        price: price,
+        agency: agency,
+        bookingLink: deepLink
+    };
 }
