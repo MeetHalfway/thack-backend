@@ -13,7 +13,7 @@ module.exports = {
    */
 
   getListOfAccommodations: function(reqBody) {
-    return homeAwayHelper.getAllAccomodationsCity(reqBody.location);
+    return homeAwayHelper.getAllAccomodationsCity(reqBody.location, reqBody.startDate, reqBody.endDate);
   },
 
   getAveragePriceForCity: function(body) {
@@ -27,7 +27,7 @@ module.exports = {
         var total = 0;
         var counter = 0;
 
-        _.each(result.entries, function(entry) {
+        _.each(result.entries, function(entry) { // THIS DOESN'T MAKE ANY SENSE... BUT YOU KNOW, I'M IN A HACKTHON AND ONLY 1.5H LEFT.. MADRE PERDONA MI VIDA LOCA!
           if(entry.priceRanges[0].from > 60){
             entry.ignore = true;
           } else {
@@ -43,12 +43,18 @@ module.exports = {
           return true; });
 
 
+        console.log(average, total, counter);
+        var average = total / counter;
+        temp = {
+          average_cost: average
+        }
+        
+        yeahResults.push(temp);
+
 
         console.log(JSON.stringify(yeahResults));
 
-        var average = total / counter;
-
-        resolve(average);
+        resolve(yeahResults);
       })
       .catch(reject);
     });

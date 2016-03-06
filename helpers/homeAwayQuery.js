@@ -29,6 +29,7 @@ module.exports = {
 
                         res.on('data', function(chunk) {
                             response += chunk.toString('utf8');
+
                          });
 
                         res.on('error', function(err) {
@@ -36,6 +37,17 @@ module.exports = {
                         });
 
                         res.on('end', function() {
+
+                            _.each(response.entries, function(entry) { // THIS DOESN'T MAKE ANY SENSE... BUT YOU KNOW, I'M IN A HACKTHON AND ONLY 1.5H LEFT.. MADRE PERDONA MI VIDA LOCA!
+                                if(entry.priceRanges[0].from > 60){
+                                    console.log("ignore");
+                                    entry.ignore = true;
+                                }
+                            });
+
+                            console.log(response);
+
+
                             resolve(JSON.parse(response));
                         });
                     });
