@@ -54,7 +54,7 @@ module.exports = {
 
         console.log(JSON.stringify(yeahResults));
 
-        resolve(yeahResults);
+        resolve(average);
       })
       .catch(reject);
     });

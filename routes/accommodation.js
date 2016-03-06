@@ -39,15 +39,6 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/hotels/:id', function (req, res) {
-        AccommodationController.getResults(req.params.id)
-            .then(function(result) {
-                res.status(200).json(result);
-            })
-            .catch(function() {
-                res.sendStatus(500);
-            });
-    });
 
     /**
      * Checks the validity of a search request object.
