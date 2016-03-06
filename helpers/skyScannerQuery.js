@@ -18,7 +18,7 @@ module.exports = {
                 + "/anywhere/"
                 + startDate + "/"
                 + endDate + "?apiKey=" + getApiKey();
-            
+
             http.get(url, function (res) {
                 var response = "";
 
