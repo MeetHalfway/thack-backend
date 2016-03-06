@@ -11,9 +11,9 @@ module.exports = function (app) {
     // ACCOMODATIONS ===============================================================
     // =============================================================================
 
-    app.get('/hotelsAvarage/:city', function (req, res) {
+    app.post('/hotelsAvarage', function (req, res) {
 
-        AccommodationController.getAveragePriceForCity(req.params.city)
+        AccommodationController.getAveragePriceForCity(req.body)
             .then(function(result) {
                 res.status(200).json(result);
             })

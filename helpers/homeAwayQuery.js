@@ -4,20 +4,25 @@ var https = require('https');
 
 var DISTANCE_IN_KM = 10;
 
+
 module.exports = {
     
-    getAllAccomodationsCity: function(city) {
+    getAllAccomodationsCity: function(city, startDate, endDate) {
+
+        console.log(city,startDate,endDate, "the variables")
 
         return new Promise(function(resolve, reject) {
 
             getLatLong(city)
                 .then(function(location) {
+                    console.log("location");
 
                     var options = {
                         hostname: 'ws.homeaway.com',
-                        path: '/public/search' + "?centerPointLatitude=" + location.lat + "&centerPointLongitude=" + location.lng + "&distanceInKm=" + DISTANCE_IN_KM,
+                        path: '/public/search' + "?centerPointLatitude=" + location.lat + "&centerPointLongitude=" + location.lng + "&distanceInKm=" + DISTANCE_IN_KM + "&sort=prices:asc",
                         headers: { 'Authorization': 'Bearer ZGJmYjQ1ZmMtOTE5Mi00ODY5LTg2OTUtZDZlODBmYWNmYTkx' }
                     };
+
 
                     var req = https.request(options, function(res) {
                         var response = "";
@@ -90,3 +95,5 @@ function getLatLong(city) {
 function getHomeAwayToken() {
     return "ah239167722783844563187741844386";
 }
+
+

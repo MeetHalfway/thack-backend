@@ -2,6 +2,7 @@
 
 var Promise = require("es6-promise").Promise;
 var homeAwayHelper = require("../helpers/homeAwayQuery");
+var _ = require("underscore");
 
 module.exports = {
 
@@ -15,15 +16,39 @@ module.exports = {
     return homeAwayHelper.getAllAccomodationsCity(reqBody.location);
   },
 
-  getAveragePriceForCity: function(city) {
+  getAveragePriceForCity: function(body) {
+
+    console.log(body, "the body");
 
     return new Promise(function(resolve, reject) {
 
-      homeAwayHelper.getAllAccomodationsCity(city).
+      homeAwayHelper.getAllAccomodationsCity(body.location, body.startDate, body.endDate).
       then(function(result) {
-        // TODO calc avg
+        var total = 0;
+        var counter = 0;
 
-        resolve(50);
+        _.each(result.entries, function(entry) {
+          if(entry.priceRanges[0].from > 60){
+            entry.ignore = true;
+          } else {
+            total += entry.priceRanges[0].from;
+            counter ++;
+          }
+        });
+
+        var yeahResults = _.filter(result, function(entry){
+          if(entry.ignore){
+            return false;
+          }
+          return true; });
+
+
+
+        console.log(JSON.stringify(yeahResults));
+
+        var average = total / counter;
+
+        resolve(average);
       })
       .catch(reject);
     });
