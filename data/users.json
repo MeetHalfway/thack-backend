@@ -5,7 +5,8 @@
         "second_name": "Scarapazzi",
         "email": "alessio@iswonderful.com",
         "sex": "M",
-        "location": "Berlin, Germany",
+        "city": "Berlin",
+        "country": "Germany",
         "picture": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xft1/v/t1.0-9/11182157_10206582180175747_2069742400570590975_n.jpg?oh=6c35bdfd0ce1ae1b59298cc7d597295a&oe=576A4AC5",
         "count_friends": 2392,
         "top_friends": [
@@ -62,7 +63,8 @@
         "second_name": "Kueuets",
         "email": "nele@iswonderful.com",
         "sex": "F",
-        "location": "Budapest, Hungary",
+        "city": "Budapest",
+        "country": "Hungary",
         "picture": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xtp1/v/t1.0-9/12801196_1082993441740274_6720207800347496210_n.jpg?oh=538248af8aac091ebfe0d8820cea3eef&oe=5756666C",
         "count_friends": 2392,
         "top_friends": [

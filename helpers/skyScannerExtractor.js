@@ -8,6 +8,7 @@ module.exports = {
         var quoteSetOne = resultSetOne['Quotes'].map(function(quote) {
             return {
                 minPrice: quote['MinPrice'],
+                originId: quote['OutboundLeg']['OriginId'],
                 destinationId: quote['OutboundLeg']['DestinationId']
             };
         });
@@ -15,6 +16,7 @@ module.exports = {
         var quoteSetTwo = resultSetTwo['Quotes'].map(function(quote) {
             return {
                 minPrice: quote['MinPrice'],
+                originId: quote['OutboundLeg']['OriginId'],
                 destinationId: quote['OutboundLeg']['DestinationId']
             };
         });
@@ -33,38 +35,36 @@ module.exports = {
 
         // create the final data structure that is returned to the client
        return finalQuoteSet.slice(0, 5).map(function(quote) {
-            var destinationObject = _.find(resultSetOne['Places'], function(place) {
-               return place['PlaceId'] === quote.destinationId;
-            });
+           var destinationObject = _.find(resultSetOne['Places'], function(place) {
+              return place['PlaceId'] === quote.destinationId;
+           });
 
-            if(destinationObject) {
-                return {
-                    minPrice: quote.minPrice,
-                    city: destinationObject['CityName'],
-                    country: destinationObject['CountryName'],
-                    airportCode: destinationObject['IataCode']
-                }
+           var originObjectOne = _.find(resultSetOne['Places'], function(place) {
+               return place['PlaceId'] === quote.originId;
+           });
+
+           var tempQuoteObject = _.find(resultSetTwo['Quotes'], function(innerQuote) {
+               return innerQuote['OutboundLeg']['DestinationId'] === quote.destinationId;
+           });
+
+           var originObjectTwo = _.find(resultSetTwo['Places'], function(place) {
+               return place['PlaceId'] === tempQuoteObject['OutboundLeg']['OriginId'];
+           });
+
+           if(destinationObject) {
+
+              return {
+                minPrice: quote.minPrice,
+                city: destinationObject['CityName'],
+                country: destinationObject['CountryName'],
+                destinationLocation: destinationObject['IataCode'],
+                originLocations: [originObjectOne['IataCode'], originObjectTwo['IataCode']]
+              }
             }
             else
                 return null;
         }).filter(function(result) {
             return !!result;
         });
-    },
-
-    extractStartLocations: function(resultArray) {
-
-        resultArray[0].forEach(function(result) {
-            // TODO
-        });
-
-        resultArray[1].forEach(function(result) {
-            // TODO
-        });
-
-        // TODO think about the data structure of the start locations in the database
-        // Should we separate them by the user? Or just add them randomly?
-        
-        return [];
     }
 };

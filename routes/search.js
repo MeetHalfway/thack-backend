@@ -2,10 +2,14 @@
 
 module.exports = function (app) {
 
+    // TODO mock user id (should be replaced by authentication in final version)
+    var userId = '356a192b7913b04c54574d18c28d46e6395428ab';
+
     // ==========================================================================
     // CONTROLLER SETUP =========================================================
     // ==========================================================================
     var SearchController = require('../controller/searchController');
+    var AppController = require('../controller/userController')(userId);
 
     // =============================================================================
     // FLIGHTS =====================================================================
@@ -13,7 +17,9 @@ module.exports = function (app) {
     app.post('/search', function (req, res) {
 
         if(searchRequestIsValid(req)) {
-            SearchController.getBestDestinations(req.body)
+            var user = AppController.getUserData(userId);
+
+            SearchController.getBestDestinations(req.body, user)
                 .then(function(result) {
                     res.status(200).json(result);
                 })
@@ -53,18 +59,14 @@ module.exports = function (app) {
      * {
      *   startDate: "2016-06-12",
      *   endDate: "2016-06-15",
-     *   people: [
-     *     { ... }
-     *   ]
-     * }
+     *   friend: { ... }
      *
      * @param req
      * @returns {boolean}
      */
     function searchRequestIsValid(req) {
 
-        if(req.body['startDate'] && req.body['endDate'] &&
-            req.body['people'] && req.body['people'].length > 1) {
+        if(req.body['startDate'] && req.body['endDate'] && req.body['friend']) {
 
             if(!timingIsValid(req.body['startDate']) || !timingIsValid(req.body['endDate']))
                 return false;
