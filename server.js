@@ -5,7 +5,8 @@ var express           = require('express'),
     session           = require('express-session'),
     morgan            = require('morgan'),
     cookieParser      = require('cookie-parser'),
-    bodyParser        = require('body-parser');
+    bodyParser        = require('body-parser'),
+    cors              = require('cors');
 
 // initiate server instance
 var app = express();
@@ -36,7 +37,9 @@ function setupServer() {
       saveUninitialized: false // passport will take care
       /* store: e.g. Redis Store */ // redis store for session data
     }));
+    app.use(cors());
 
+    /*
     // Add headers
     app.use(function (req, res, next) {
         // Website you wish to allow to connect
@@ -55,7 +58,7 @@ function setupServer() {
         // Pass to next layer of middleware
         next();
     });
-
+    */
     app.set('jwtTokenSecret', 'secretsecret');
 }
 
