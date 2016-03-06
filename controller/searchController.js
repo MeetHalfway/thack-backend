@@ -53,6 +53,8 @@ module.exports = {
                   searchObject.friend,
                   userObject
               ],
+              startDate: searchObject.startDate,
+              endDate: searchObject.endDate,
               bestConnections: bestConnections,
               trips: []
             };
@@ -94,11 +96,11 @@ module.exports = {
           if(docs.length > 1) console.warn('warn', 'More than one document with the given ID found.');
 
           var promiseArray = [];
-          docs.bestConnections.forEach(function(connection) {
+          docs[0].bestConnections.forEach(function(connection) {
 
             promiseArray.push(
-                SkyScannerQuery.getConnection("", "", connection.originLocations[0], connection.destinationLocation),
-                SkyScannerQuery.getConnection("", "", connection.originLocations[1], connection.destinationLocation)
+                SkyScannerQuery.getConnection(docs[0].startDate, docs[0].endDate, connection.originLocations[0], connection.destinationLocation),
+                SkyScannerQuery.getConnection(docs[0].startDate, docs[0].endDate, connection.originLocations[1], connection.destinationLocation)
             );
           });
 

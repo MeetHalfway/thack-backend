@@ -21,20 +21,27 @@ module.exports = {
             };
         });
 
+        var resultSet = [];
+
         // filter out all connection from one result set that do not have a match in the other result set
-        var finalQuoteSet = quoteSetOne.filter(function(quote) {
-            return !!_.find(quoteSetTwo, function(innerQuote) {
-                return innerQuote.destinationId === quote.destinationId;
-            })
+        var finalQuoteSet = quoteSetOne.forEach(function(quote) {
+
+            var matchingQuote = _.find(quoteSetTwo, function(innerQuote) {
+                return innerQuote.destinationId === quote.destinationId; });
+
+            if(matchingQuote) {
+                resultSet.push(quote);
+                resultSet[resultSet.length - 1]['minPrice'] += matchingQuote['minPrice'];
+            }
         });
 
         // sort the reduced result set by price and limit it to 5 items
-        finalQuoteSet.sort(function(a, b) {
+        resultSet.sort(function(a, b) {
            return a.minPrice - b.minPrice;
         });
 
         // create the final data structure that is returned to the client
-       return finalQuoteSet.slice(0, 5).map(function(quote) {
+       return resultSet.slice(0, 5).map(function(quote) {
            var destinationObject = _.find(resultSetOne['Places'], function(place) {
               return place['PlaceId'] === quote.destinationId;
            });
