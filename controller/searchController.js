@@ -27,14 +27,14 @@ module.exports = {
       var requestOne = SkyScannerQuery.getAllDestinationsFromCity(
           searchObject.startDate,
           searchObject.endDate,
-          searchObject.friend.city,
-          searchObject.friend.country);
+          searchObject.friend.city_code,
+          searchObject.friend.country_code);
 
       var requestTwo = SkyScannerQuery.getAllDestinationsFromCity(
           searchObject.startDate,
           searchObject.endDate,
-          userObject.city,
-          userObject.country);
+          userObject.city_code,
+          userObject.country_code);
 
       Promise.all([requestOne, requestTwo])
           .then(function(resultArray) {
