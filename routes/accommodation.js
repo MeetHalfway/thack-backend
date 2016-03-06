@@ -13,30 +13,20 @@ module.exports = function (app) {
 
     app.get('/hotelsAvarage/:city', function (req, res) {
 
-        if(hotelRequestIsValid(req) || true) {
-            AccommodationController.getListAccomodations(req.params.city)
-                .then(function(result) {
-                    res.status(200).json(result);
-                })
-                .catch(function() {
-                    res.sendStatus(500);
-                });
-        }
-        else {
-            res.sendStatus(400);
-        }
+        AccommodationController.getAveragePriceForCity(req.params.city)
+            .then(function(result) {
+                res.status(200).json(result);
+            })
+            .catch(function() {
+                res.sendStatus(500);
+            });
+
     });
-
-
-
-
-
-
 
     app.post('/hotels', function (req, res) {
 
         if(hotelRequestIsValid(req)) {
-            AccommodationController.getAccommodation(req.body)
+            AccommodationController.getListOfAccommodations(req.body)
                 .then(function(result) {
                     res.status(200).json(result);
                 })
@@ -67,9 +57,10 @@ module.exports = function (app) {
      */
     function hotelRequestIsValid(req) {
 
-        if(req.body['location'] && req.body['startDate'] && req.body['endDate'])
-            if(!timingIsValid(req.body['startDate']) || !timingIsValid(req.body['endDate']))
+        if(req.body['location'] && req.body['startDate'] && req.body['endDate']) {
+            if (!timingIsValid(req.body['startDate']) || !timingIsValid(req.body['endDate']))
                 return false;
+        }
         else
             return false;
 
@@ -81,7 +72,7 @@ module.exports = function (app) {
      */
     function timingIsValid(timing) {
         var timePattern =
-            /^[0-9]{4}\-[0-9]{2}\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}$/;
+            /^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/;
 
         return timePattern.test(timing);
     }

@@ -6,29 +6,28 @@ var homeAwayHelper = require("../helpers/homeAwayQuery");
 module.exports = {
 
   /**
-   * get the average price for accomodation in a city.
+   * get the average price for accommodation in a city.
    *
-   * @param searchObject
+   * @param reqBody
    */
 
-  getListAccomodations: function(city) {
-
-    console.log("works", city);
-    return homeAwayHelper.getAllAccomodationsCity(city);
-
+  getListOfAccommodations: function(reqBody) {
+    return homeAwayHelper.getAllAccomodationsCity(reqBody.location);
   },
 
-  getAverageForCity: function(city) {
+  getAveragePriceForCity: function(city) {
 
-    var list = homeAwayHelper.getAllAccomodationsCity(city);
-    //calc avg
-    return 0;
+    return new Promise(function(resolve, reject) {
 
+      homeAwayHelper.getAllAccomodationsCity(city).
+      then(function(result) {
+        // TODO calc avg
+
+        resolve(50);
+      })
+      .catch(reject);
+    });
   },
-
-
-
-
 
 
   /**
