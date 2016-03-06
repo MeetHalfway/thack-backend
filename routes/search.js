@@ -21,6 +21,7 @@ module.exports = function (app) {
 
             SearchController.getBestDestinations(req.body, user)
                 .then(function(result) {
+                    res.set('Access-Control-Allow-Origin', '*');
                     res.status(200).json(result);
                 })
                 .catch(function() {
