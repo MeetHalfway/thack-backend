@@ -1,8 +1,35 @@
 // controllers/accommodationController.js
 
 var Promise = require("es6-promise").Promise;
+var homeAwayHelper = require("../helpers/homeAwayQuery");
 
 module.exports = {
+
+  /**
+   * get the average price for accomodation in a city.
+   *
+   * @param searchObject
+   */
+
+  getListAccomodations: function(city) {
+
+    console.log("works", city);
+    return homeAwayHelper.getAllAccomodationsCity(city);
+
+  },
+
+  getAverageForCity: function(city) {
+
+    var list = homeAwayHelper.getAllAccomodationsCity(city);
+    //calc avg
+    return 0;
+
+  },
+
+
+
+
+
 
   /**
    * Do the search for accommodations.

@@ -8,8 +8,31 @@ module.exports = function (app) {
     var AccommodationController = require('../controller/accommodationController');
 
     // =============================================================================
-    // FLIGHTS =====================================================================
+    // ACCOMODATIONS ===============================================================
     // =============================================================================
+
+    app.get('/hotelsAvarage/:city', function (req, res) {
+
+        if(hotelRequestIsValid(req) || true) {
+            AccommodationController.getListAccomodations(req.params.city)
+                .then(function(result) {
+                    res.status(200).json(result);
+                })
+                .catch(function() {
+                    res.sendStatus(500);
+                });
+        }
+        else {
+            res.sendStatus(400);
+        }
+    });
+
+
+
+
+
+
+
     app.post('/hotels', function (req, res) {
 
         if(hotelRequestIsValid(req)) {
