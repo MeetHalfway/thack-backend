@@ -6,7 +6,9 @@
         "email": "alessio@iswonderful.com",
         "sex": "M",
         "city": "Berlin",
+        "city_code": "BERL-sky",
         "country": "Germany",
+        "country_code": "DE",
         "picture": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xft1/v/t1.0-9/11182157_10206582180175747_2069742400570590975_n.jpg?oh=6c35bdfd0ce1ae1b59298cc7d597295a&oe=576A4AC5",
         "count_friends": 2392,
         "top_friends": [
@@ -16,7 +18,10 @@
                 "second_name": "Kueuets",
                 "email": "nele@iswonderful.com",
                 "picture": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xtp1/v/t1.0-9/12801196_1082993441740274_6720207800347496210_n.jpg?oh=538248af8aac091ebfe0d8820cea3eef&oe=5756666C",
-                "location": "Budapest, Hungary"
+                "city":"Budapest",
+                "city_code":"BUD-sky",
+                "country": "Hungary",
+                "country_code": "HU"
 
             },
             {
@@ -25,7 +30,10 @@
                 "second_name": "Jennings",
                 "email": "Alfonso@iswonderful.com",
                 "picture": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xal1/v/t1.0-9/12341531_10206702944004078_675065463407394735_n.jpg?oh=ca7be18c005bc76f8a14245f12d1642e&oe=57549315",
-                "location": "Paris, France"
+                "city":"Paris",
+                "city_code":"PARI-sky",
+                "country": "France",
+                "country_code": "FR"
 
             },
             {
@@ -34,7 +42,10 @@
                 "second_name": "Maxim",
                 "email": "Jin@iswonderful.com",
                 "picture": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/12294637_10205226451650812_4130130515853753206_n.jpg?oh=48dc6a88e285cdcb5558b41d873e68fb&oe=5768DF38",
-                "location": "Paris, France"
+                "city":"Paris",
+                "city_code":"PARI-sky",
+                "country": "France",
+                "country_code": "FR"
 
             },
             {
@@ -43,7 +54,10 @@
                 "second_name": "Kolla",
                 "email": "karl@iswonderful.com",
                 "picture": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xpl1/v/t1.0-9/1914537_909542345809478_419891855926471111_n.jpg?oh=5405114a9f57b0940933ad9a351dbf1e&oe=575926C2",
-                "location": "Paris, France"
+                "city":"Paris",
+                "city_code":"PARI-sky",
+                "country": "France",
+                "country_code": "FR"
 
             },
             {
@@ -52,7 +66,10 @@
                 "second_name": "Germa",
                 "email": "adriana@iswonderful.com",
                 "picture": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xpf1/v/t1.0-9/12798996_10207339844387909_759600737681859463_n.jpg?oh=e5b7d8867ca3a46c4dd5ca284f337c70&oe=5797E1FA",
-                "location": "Berlin, Germany"
+                "city":"Berlin",
+                "city_code":"BERL-sky",
+                "country": "Germany",
+                "country_code": "DE"
 
             }
         ]
@@ -63,8 +80,10 @@
         "second_name": "Kueuets",
         "email": "nele@iswonderful.com",
         "sex": "F",
-        "city": "Budapest",
+        "city":"Budapest",
+        "city_code":"BUD-sky",
         "country": "Hungary",
+        "country_code": "HU",
         "picture": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xtp1/v/t1.0-9/12801196_1082993441740274_6720207800347496210_n.jpg?oh=538248af8aac091ebfe0d8820cea3eef&oe=5756666C",
         "count_friends": 2392,
         "top_friends": [
@@ -74,7 +93,10 @@
                 "second_name": "Scarapazzi",
                 "email": "alessio@iswonderful.com",
                 "picture": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xft1/v/t1.0-9/11182157_10206582180175747_2069742400570590975_n.jpg?oh=6c35bdfd0ce1ae1b59298cc7d597295a&oe=576A4AC5",
-                "location": "Tallinn, Estonia"
+                "city":"Berlin",
+                "city_code":"BERL-sky",
+                "country": "Germany",
+                "country_code": "DE"
 
             },
             {
@@ -83,7 +105,10 @@
                 "second_name": "Wang",
                 "email": "jens@iswonderful.com",
                 "picture": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xpf1/v/t1.0-9/12744053_1032666190140693_6273940771715082710_n.jpg?oh=6a7c519f7351e2c76043fe8b7d04258e&oe=574B58C7",
-                "location": "Tartu, Estonia"
+                "city":"Tartu",
+                "city_code":"TAY-sky",
+                "country": "Estonia",
+                "country_code": "EE"
 
             },
             {
@@ -92,7 +117,10 @@
                 "second_name": "Make",
                 "email": "Ugo@iswonderful.com",
                 "picture": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xpf1/v/t1.0-9/12744053_1032666190140693_6273940771715082710_n.jpg?oh=6a7c519f7351e2c76043fe8b7d04258e&oe=574B58C7",
-                "location": "Tartu, Estonia"
+                "city":"Tartu",
+                "city_code":"TAY-sky",
+                "country": "Estonia",
+                "country_code": "EE"
 
             },
             {
@@ -101,7 +129,10 @@
                 "second_name": "Bollas",
                 "email": "Fren@iswonderful.com",
                 "picture": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xaf1/t31.0-8/10847357_10205471373162650_5618021222798401727_o.jpg",
-                "location": "Tallinn, Estonia"
+                "city":"Tallinn",
+                "city_code":"TLL-sky",
+                "country": "Estonia",
+                "country_code": "EE"
 
             },
             {
@@ -110,7 +141,10 @@
                 "second_name": "Kudams",
                 "email": "Mari@iswonderful.com",
                 "picture": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xpf1/v/t1.0-9/11953188_1165667306783056_776507565251912240_n.jpg?oh=3269b79fa96ffb714702237904d39815&oe=5792E1B7",
-                "location": "Budapest, Hungary"
+                "city":"Budapest",
+                "city_code":"BUD-sky",
+                "country": "Hungary",
+                "country_code": "HU"
 
             }
         ]
