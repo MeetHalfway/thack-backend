@@ -3,7 +3,7 @@ var _ = require('underscore');
 var https = require('https');
 
 var DISTANCE_IN_KM = 10;
-
+var LIMIT_HOMEWAY_PRICE = 250;
 
 module.exports = {
     
@@ -39,8 +39,7 @@ module.exports = {
                         res.on('end', function() {
 
                             _.each(response.entries, function(entry) { // THIS DOESN'T MAKE ANY SENSE... BUT YOU KNOW, I'M IN A HACKTHON AND ONLY 1.5H LEFT.. MADRE PERDONA MI VIDA LOCA!
-                                if(entry.priceRanges[0].from > 250){
-                                    console.log("ignore");
+                                if(entry.priceRanges[0].from > LIMIT_HOMEWAY_PRICE){
                                     entry.ignore = true;
                                 }
                             });
