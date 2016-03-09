@@ -9,8 +9,6 @@ module.exports = {
     
     getAllAccomodationsCity: function(city, startDate, endDate) {
 
-        console.log(city,startDate,endDate, "the variables")
-
         return new Promise(function(resolve, reject) {
 
             getLatLong(city)
@@ -97,14 +95,4 @@ function getLatLong(city) {
         });
     })
 }
-
-/**
- *
- *
- * @returns {string}
- */
-function getHomeAwayToken() {
-    return "ah239167722783844563187741844386";
-}
-
 
